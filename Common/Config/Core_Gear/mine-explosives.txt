@@ -1,0 +1,12 @@
+_u = _u + ['APERSBoundingMine_Range_Mag'];	_i = _i + [['','','CfgMagazines','',200,0,true,false,0,0,true,0,0,0,0,0,0]];
+_u = _u + ['APERSMine_Range_Mag'];	_i = _i + [['','','CfgMagazines','',200,0,true,false,0,0,true,0,0,0,0,0,0]];
+_u = _u + ['APERSTripMine_Wire_Mag'];	_i = _i + [['','','CfgMagazines','',200,0,true,false,0,0,true,0,0,0,0,0,0]];
+_u = _u + ['ATMine_Range_Mag'];	_i = _i + [['','','CfgMagazines','',300,0,true,false,0,0,true,0,0,0,0,0,0]];
+_u = _u + ['ClaymoreDirectionalMine_Remote_Mag'];	_i = _i + [['','','CfgMagazines','',200,0,true,false,0,0,true,0,0,0,0,0,0]];
+_u = _u + ['DemoCharge_Remote_Mag'];	_i = _i + [['','','CfgMagazines','',250,0,true,false,0,0,true,0,0,0,0,0,0]];
+_u = _u + ['IEDLandBig_Remote_Mag'];	_i = _i + [['','','CfgMagazines','',500,0,true,false,0,0,true,0,0,0,0,0,0]];
+_u = _u + ['IEDLandSmall_Remote_Mag'];	_i = _i + [['','','CfgMagazines','',200,0,true,false,0,0,true,0,0,0,0,0,0]];
+_u = _u + ['IEDUrbanBig_Remote_Mag'];	_i = _i + [['','','CfgMagazines','',500,0,true,false,0,0,true,0,0,0,0,0,0]];
+_u = _u + ['IEDUrbanSmall_Remote_Mag'];	_i = _i + [['','','CfgMagazines','',200,0,true,false,0,0,true,0,0,0,0,0,0]];
+_u = _u + ['SatchelCharge_Remote_Mag'];	_i = _i + [['','','CfgMagazines','',300,0,true,false,0,0,true,0,0,0,0,0,0]];
+_u = _u + ['SLAMDirectionalMine_Wire_Mag'];	_i = _i + [['','','CfgMagazines','',250,0,true,false,0,0,true,0,0,0,0,0,0]];

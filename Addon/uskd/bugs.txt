@@ -1,0 +1,7 @@
+- stringtable.xml is not complete. absent: finite, mando_missile, warfare menu, parameters file, Func_Client_UpdateGUI.sqf, hint files, uskd hint files, and and...
+- for what is the menu item "ammunition" in the com/engineer menu. There no entries. For what then is the function?
+- mash of the enemy can sometimes be seen on the map
+- AI is kind of stupid and comes with its own waypoints can not cope on Takistan. it lies on the map? on Chernarus it's much better...
+- why the entries are disabled for Italian in stringtable.xml?
+- XXX bei zweitem mash von anderem medic wird mash von erstem medic abgebaut (Medic slot bezeichnung) (erledigt, geht)
+- XXX einige Spawnpunkte für das HQ beim Start des Spiels sind Außerhalb der Karte, bei Einschränkung der Karte in den Einstellungen. (Counter läuft dann) z.Bsp. bei: Chaman, (angepasst in der mission.sqm)

@@ -1,0 +1,9 @@
+RadioTrigger_1 setTriggerActivation ["NONE", "NOT PRESENT", true];
+RadioTrigger_2 setTriggerActivation ["NONE", "NOT PRESENT", true];
+RadioTrigger_3 setTriggerActivation ["NONE", "NOT PRESENT", true];
+RadioTrigger_4 setTriggerActivation ["NONE", "NOT PRESENT", true];
+RadioTrigger_5 setTriggerActivation ["NONE", "NOT PRESENT", true];
+RadioTrigger_6 setTriggerActivation ["NONE", "NOT PRESENT", true];
+RadioTrigger_7 setTriggerActivation ["NONE", "NOT PRESENT", true];
+RadioTrigger_8 setTriggerActivation ["NONE", "NOT PRESENT", true];
+RadioTrigger_9 setTriggerActivation ["NONE", "NOT PRESENT", true];

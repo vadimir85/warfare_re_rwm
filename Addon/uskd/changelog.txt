@@ -1,0 +1,445 @@
+---> v015.26.01 <---------------------------------------------------------------------
+
+(XXX = completed)
+- implement the spawn points for the HQ at start of the game (avoidance of known set)
+- translate the hint boxes (Strings for stringtable.xml)
+- XXX Updating the kernel to version 015.26 (from original rubber version)
+- XXX change Noob hint box (noob see not box)
+- XXX add noob chat message
+- XXX insert translate strings for cases hit legs
+- XXX change respawn output (output to long)
+- XXX translate string for fieldrepair.sqf
+- XXX translate string for firstaid.sqf
+- XXX translate string for firstaidtm.sqf
+- XXX translate string for rank.sqf
+- XXX translate string for rank_noob.sqf
+- XXX translate any strings for field repair and repair in stringtable.xml
+- XXX insert translate strings for \Rsc\parameters.hpp (see in stringtable.xml)
+- XXX insert translate strings for Tooltips in WF Mneu in \Rsc\dialogs.hpp (see in stringtable.xml)
+
+###################################################################################
+- delete String in \Common\Config\Core_Loadout\CombinedOps\Loadout_RU.sqf ("*/" no function. forgotten?)
+original (line 217):
+		//_w = _w + ['1Rnd_SmokeYellow_M203'];*/
+new (line 217):
+		//_w = _w + ['1Rnd_SmokeYellow_M203'];
+###################################################################################
+- changes in file \Client\Func_Client_UpdateGUI.sqf (output to long, wordwrap)
+original line:
+		_lowertext ctrlSetStructuredText composeText([parseText(format ["<t size='2'><img image='ranks\%1.paa' align='left'/></t><t color='#FAFAD2' align='left' size='1'> %1 </t><t color='#98FB98' size ='1.2'>%2pt</t> ( Respawn: <t color='#%3' size ='1'>%4s - %5</t> )",_rank,score player,_respawnColor,respawnTotal,respawnTnTTime])]);
+new line:
+		_lowertext ctrlSetStructuredText composeText([parseText(format ["<t size='2'><img image='ranks\%1.paa' align='left'/></t><t color='#FAFAD2' align='left' size='1'> %1 </t><t color='#98FB98' size ='1.2'>%2pt</t> (Respawn: <t color='#%3' size ='1'>%4s/%5</t>)",_rank,score player,_respawnColor,respawnTotal,respawnTnTTime])]);
+###################################################################################
+- changes in file \Client\Func_Client_UpdateGUI.sqf (Noob see not hint box)
+original lines:
+			if (_score <= -5) then {
+			_rank = "NOOB";
+			if (promotion == -1) then {
+				null = [_rank,1]ExecVM "Hint\rank.sqf";
+				promotion = -2;
+				};
+			};
+new lines:
+			if (_score <= -5) then {
+			_rank = "NOOB";
+			_respawntimenoob = respawnTotal + 2;
+			if (promotion == -1) then {
+				sleep _respawntimenoob;
+				player globalChat Format[localize "STR_WF_CHAT_Noob_Rank", name player];
+				sleep 0.5;
+				null = [_rank,1]ExecVM "Hint\rank_noob.sqf";
+				promotion = -2;
+				};
+			};
+###################################################################################
+- changes in file \Client\Func_Client_UpdateGUI.sqf (translate strings, see in stringtable.xml)
+original lines:
+		case 0: {
+				player sideChat "DAMN JESUS! I can't stand... I need Medic!!";
+				};
+		case 1: {
+				player sideChat "HOLY SHIT! I can't stand... I need Medic!!";
+				};
+		case 2: {
+				player sideChat "Cazzo mi hanno colpito alle gambe! Figli di puttana! Need Medic!!";
+				};
+		case 3: {
+				player sideChat "FUCKING BASTARDS! they hit my legs.... Need Medic!!";
+				};
+			};
+new lines:
+		case 0: {
+				player sideChat localize "STR_WF_RUB_HitLegs_Case1";
+				};
+		case 1: {
+				player sideChat localize "STR_WF_RUB_HitLegs_Case2";
+				};
+		case 2: {
+				player sideChat localize "STR_WF_RUB_HitLegs_Case3";
+				};
+		case 3: {
+				player sideChat localize "STR_WF_RUB_HitLegs_Case4";
+				};
+###################################################################################
+- change \hint\fieldrepair.sqf (insert strings for sringtable.xml)
+original lines:
+_title  = "<t color='#32CD32' size='1.5' shadow='1.5' shadowColor='#000000' align='center'><br/>Field Repair</t><br/><br/>";
+_text   = "<t color='#ffffff' size='1' shadow='1' shadowColor='#000000' align='Center'>Vehicle is repaired<br/>repair kit used<br/><br/></t>";
+new lines:
+_title  = "<t color='#32CD32' size='1.5' shadow='1.5' shadowColor='#000000' align='center'><br/>" + (localize "STR_WF_RUB_HintBoxFieldRepairTitle") + "</t><br/><br/>";
+_text   = "<t color='#ffffff' size='1' shadow='1' shadowColor='#000000' align='Center'>" + (localize "STR_WF_RUB_HintBoxFieldRepairDesc") + "<br/><br/></t>";
+###################################################################################
+- change \hint\firstaid.sqf (insert strings for sringtable.xml)
+original lines:
+_title  = "<t color='#FFC0CB' size='1.5' shadow='1.5' shadowColor='#000000' align='center'><br/>First Aid</t><br/><br/>";
+_text   = "<t color='#ffffff' size='1' shadow='1' shadowColor='#000000' align='Center'>You feel better...<br/>now be careful!<br/><br/></t>";
+new lines:
+_title  = "<t color='#FFC0CB' size='1.5' shadow='1.5' shadowColor='#000000' align='center'><br/>" + (localize "STR_WF_RUB_HintBoxFirstAidTitle") + "</t><br/><br/>";
+_text   = "<t color='#ffffff' size='1' shadow='1' shadowColor='#000000' align='Center'>" + (localize "STR_WF_RUB_HintBoxFirstAidDesc") + "<br/><br/></t>";
+###################################################################################
+- change \hint\firstaidtm.sqf (insert strings for sringtable.xml)
+original lines:
+_title  = "<t color='#FFC0CB' size='1.5' shadow='1.5' shadowColor='#000000' align='center'><br/>First Aid</t><br/><br/>";
+_text   = "<t color='#ffffff' size='1' shadow='1' shadowColor='#000000' align='Center'>Team mate Healed<br/>take care man!<br/><br/></t>";
+new lines:
+_title  = "<t color='#FFC0CB' size='1.5' shadow='1.5' shadowColor='#000000' align='center'><br/>" + (localize "STR_WF_RUB_HintBoxFirstAidTMTitle") + "</t><br/><br/>";
+_text   = "<t color='#ffffff' size='1' shadow='1' shadowColor='#000000' align='Center'>" + (localize "STR_WF_RUB_HintBoxFirstAidTMDesc") + "<br/><br/></t>";
+###################################################################################
+- change \hint\rank.sqf (insert strings for sringtable.xml)
+original lines:
+_text   = "<t color='#ffffff' size='1' shadow='1' shadowColor='#000000' align='Center'><br/>Congratulations!<br/>You've been Promoted.<br/><br/></t>";
+new lines:
+_text   = "<t color='#ffffff' size='1' shadow='1' shadowColor='#000000' align='Center'><br/>" + (localize "STR_WF_RUB_HintBox_RankDesc") + "<br/><br/></t>";
+###################################################################################
+- change \hint\rank_noob.sqf (insert strings for sringtable.xml)
+new lines:
+_text   = "<t color='#DC143C' size='1' shadow='1' shadowColor='#000000' align='Center'><br/>" + (localize "STR_WF_RUB_HintBox_NoobRankDesc") + "<br/><br/></t>";
+###################################################################################
+
+
+
+---> v015.24.01 <---------------------------------------------------------------------
+
+(XXX = completed)
+- XXX Updating the kernel to version 015.24 (from original rubber version)
+- XXX insert MK16/17 (SCAR) on Opfor Side for "modi" (request of a member ;))
+- XXX activate mando missile
+- XXX deactivate gear on strongpoints, only depot
+- XXX set Respawn timer to 20s
+- XXX change missile range to 3000m
+- XXX adapting and updating stringtable.xml
+- XXX String to stringtable.xml and translate for \Client\Module\Skill\Skill_SpecOps.sqf
+
+###################################################################################
+- change \Common\Config\Core_Gear\Core_Arrowhead_G.sqf (insert MK16/17 (SCAR) on Opfor Side for "modi")
+Original file \Common\Config\Core_Gear\Core_Arrowhead_G.sqf.org
+insert from line 392:
+_u = _u + ['SCAR_L_CQC_EGLM_Holo'];
+_i = _i + [['','','CfgWeapons','',445,1,true,false,0,0,true]];
+
+_u = _u + ['SCAR_H_STD_EGLM_Spect'];
+_i = _i + [['','','CfgWeapons','',480,2,true,false,0,0,true]];
+############
+- change \Common\Config\Core_Loadout\CombinedOps\Loadout_RU.sqf (insert MK16/17 (SCAR) on Opfor Side for "modi")
+Original file \Common\Config\Core_Loadout\CombinedOps\Loadout_RU.sqf.org
+change from line 110:
+		/*_w = _w + ['G36a'];
+		_w = _w + ['G36A_camo'];
+		_w = _w + ['M4A3_CCO_EP1'];
+		_w = _w + ['M4A3_RCO_GL_EP1'];
+		if (_tiMode) then {
+			_w = _w + ['SCAR_L_STD_EGLM_TWS'];
+		};
+		_w = _w + ['SCAR_L_STD_EGLM_RCO'];
+		_w = _w + ['SCAR_L_CQC_EGLM_Holo'];
+		_w = _w + ['SCAR_H_STD_EGLM_Spect'];
+			if (_tiMode) then {
+			_w = _w + ['M249_TWS_EP1'];
+		};*/
+to:
+		/*_w = _w + ['G36a'];
+		_w = _w + ['G36A_camo'];
+		_w = _w + ['M4A3_CCO_EP1'];
+		_w = _w + ['M4A3_RCO_GL_EP1'];
+		if (_tiMode) then {
+			_w = _w + ['SCAR_L_STD_EGLM_TWS'];
+		};*/
+		_w = _w + ['SCAR_L_STD_EGLM_RCO'];
+		_w = _w + ['SCAR_L_CQC_EGLM_Holo'];
+		_w = _w + ['SCAR_H_STD_EGLM_Spect'];
+			if (_tiMode) then {
+			_w = _w + ['M249_TWS_EP1'];
+		};
+###################################################################################
+edit stringtable.xml (line 1589, german string)
+from:
+	  <Key ID="STR_WF_PARAMETER_TownsGear">
+        <English>TOWNS: Equipment Purchase</English>
+        <French>VILLES: Achat d'Equipement</French>
+        <German>TOWNS: Equipment Purchase</German>
+        <Russian>TOWNS: Equipment Purchase</Russian>
+        <ItalianDisabled>TOWNS: Equipment Purchase</ItalianDisabled>
+
+to:
+	  <Key ID="STR_WF_PARAMETER_TownsGear">
+        <English>TOWNS: Equipment Purchase</English>
+        <French>VILLES: Achat d'Equipement</French>
+        <German>STÄDTE: Ausrüstung kaufen</German>
+        <Russian>TOWNS: Equipment Purchase</Russian>
+        <ItalianDisabled>TOWNS: Equipment Purchase</ItalianDisabled>
+############
+insert lines for translation "RULE" titles from Parameters.hpp
+new lines:
+<!-- translation for non-existent in Parameter.hpp (title fields) -->
+<Key ID="STR_WF_PARAMETER_VictoryConditionTitle">
+		<English>RULE: Victory Condition</English>
+        <French>RÈGLE: Condition de Victoire</French>
+        <German>REGEL: Siegbedingung</German>
+        <Russian>ПРАВИЛО: Условие для победы</Russian>
+        <ItalianDisabled>REGOLA: Condizioni di Vittoria</ItalianDisabled>
+      </Key>
+
+<Key ID="STR_WF_PARAMETER_TownsAmountTitle">
+        <English>RULE: Number of Towns</English>
+        <French>RÈGLE: Nombre de villes</French>
+        <German>REGEL: Anzahl der Städte</German>
+        <Russian>ПРАВИЛО: Количество городов</Russian>
+        <ItalianDisabled>REGOLA: Numero di città</ItalianDisabled>
+      </Key>
+
+<Key ID="STR_WF_PARAMETER_VictoryTownTitle">
+        <English>RULE: Towns for Victory</English>
+        <French>RÈGLE: Villes pour la victoire</French>
+        <German>REGEL: Städte für Sieg</German>
+        <Russian>ПРАВИЛО: Города для победы</Russian>
+        <ItalianDisabled>REGOLA: Città per la vittoria</ItalianDisabled>
+      </Key>
+
+<Key ID="STR_WF_PARAMETER_PeaceTimerTitle">
+		<English>RULE: Peace Timer Lenght</English>
+        <French>RÈGLE: Durée de la période de paix</French>
+        <German>REGEL: Dauer der Friedenszeit</German>
+        <Russian>ПРАВИЛО: Продолжительность периода мира</Russian>
+        <ItalianDisabled>REGOLA: Durata del periodo di pace</ItalianDisabled>
+      </Key>
+
+<Key ID="STR_WF_PARAMETER_TimeoutTitle">
+		<English>RULE: Timeout (Game Max Duration)</English>
+        <French>RÈGLE: Timeout (durée maximale du jeu)</French>
+        <German>REGEL: Timeout (maximale Spieldauer)</German>
+        <Russian>ПРАВИЛО: Timeout (максимальная продолжительность игры)</Russian>
+        <ItalianDisabled>REGOLA: Timeout (durata massima del gioco)</ItalianDisabled>
+      </Key>
+
+############
+- change all Strings from "<German>BASE:" to "<German>BASIS:"
+############
+- add new Strings (for \Client\Module\Skill\Skill_SpecOps.sqf):
+<Key ID="STR_WF_SpecOpVehiclealreadyOpen">
+        <English> Vehicle is already open!</English>
+        <French> Véhicule est déjà ouvert!</French>
+        <German> Fahrzeug ist schon offen!</German>
+        <Russian> Автомобиль уже открыт!</Russian>
+        <Italian> Il veicolo è già aperto!</Italian>
+      </Key>
+
+<Key ID="STR_WF_SpecOpVehicleOpen">
+        <English> Vehicle is open...</English>
+        <French> Du véhicule est ouverte...</French>
+        <German> Fahrzeug ist offen...</German>
+        <Russian> Автомобиль является открытым...</Russian>
+        <Italian> Del veicolo è aperto...</Italian>
+      </Key>
+###################################################################################
+edit \Client\Module\Skill\Skill_SpecOps.sqf
+new Strings for stringtable.xml
+Original file:
+\Client\Module\Skill\Skill_SpecOps.sqf.org
+###################################################################################
+- change \Rsc\Parameters.hpp (insert Strings for "RULE" titles)
+original lines:
+(line 6)		title = "RULE: Victory Condition";
+(line 12)		title = "RULE: Number of Towns";
+(line 18)		title = "RULE: Towns For Victory";
+(line 24)		title = "RULE: Peace Timer Lenght";
+(line 30)		title = "RULE: Timeout (Game Max Duration)";
+new lines:
+(line 6)		title = "$STR_WF_PARAMETER_VictoryConditionTitle";
+(line 12)		title = "$STR_WF_PARAMETER_TownsAmountTitle";
+(line 18)		title = "$STR_WF_PARAMETER_VictoryTownTitle";
+(line 24)		title = "$STR_WF_PARAMETER_PeaceTimerTitle";
+(line 30)		title = "$STR_WF_PARAMETER_TimeoutTitle";
+###################################################################################
+
+
+
+---> v015.17.01 (before update to v015.24) <-------------------------------------------------
+
+- insert uskd folder
+###################################################################################
+- change \Rsc\Parameters.hpp Settings (fix settings for server restarts; add disable switch for mando, member and guest do not want the)
+original file \Rsc\Parameters.hpp.org
+###################################################################################
+- edit \mission.sqm
+original lines (63\64):
+		briefingName="Warfare-RE Rubber EDITION Build 015.14 CO - Takistan";
+		briefingDescription="RUBBER EDITION - www.4qw.it/re - www.4qw.it/forum";
+###################################################################################
+- edit \version.sqf
+original line (19):
+#define WF_MISSIONNAME "Warfare-RE Rubber EDITION Build 015.14 (CO) - Takistan"
+###################################################################################
+- medic can build one mash. more mash is only for hunting good
+- medics have separates mashs
+(compare files to see the changes)
+Original files:
+\Client\Module\Skill\Skill_Medic.sqf.org
+\Client\Module\Skill\Actions\Officer_Undeploy_MASH.sqf.org
+###################################################################################
+change line (23) in \Client\Functions\Client_Mash.sqf (red marker and player name)
+original line:
+	_markerName setMarkerText " Mash";
+new line:
+	_markerName setMarkerText Format [" Mash (%1)",name unit];
+
+not work, in progress (need a system variable for player)
+current:
+	_markerName setMarkerText " Mash (Respawn)";
+###################################################################################
+change line (68) in \Client\MapMarkersTitling.sqf (one space more)
+original line:
+            _text = format ["%1: %2", name player, _text];
+new line:
+            _text = format [" %1: %2", name player, _text];
+###################################################################################
+- add lines \description.ext
+/////-----US-KD Anpassungen
+
+//--- US-KD GCam
+#include "uskd\admin\gcam\gcam_component.hpp"
+
+//--- US-KD Sichtweite/Gras Menü
+#include "uskd\scripts\view_settings\dialog\common.hpp"
+#include "uskd\scripts\view_settings\dialog\mission_settings.hpp"
+
+//--- US-KD AdminTool Menü
+#include "uskd\scripts\menu_admins\dialog\common.hpp"
+#include "uskd\scripts\menu_admins\dialog\mission_settings.hpp"
+###################################################################################
+- add lines \initJIPCompatible.sqf
+/////-----US-KD Anpassungen
+
+//--- US-KD verschiedene Aufrufe
+[] execVM "uskd\scripts\uskd.sqf";
+###################################################################################
+- insert lines in \Rsc\Sounds.hpp 
+lines (43-74):
+	//--- US-KD Sounds
+	class uskd_taskhint
+	{
+		name = "uskd_taskhint";
+		sound[] = {"uskd\sounds\uskd_taskhint.wss", db+3, 1.0};
+		titles[] = {0};
+	};
+	class uskd_comedian
+	{
+		name = "uskd_comedian";
+		sound[] = {"uskd\sounds\uskd_comedian.ogg", db+3, 1.0};
+		titles[] = {0};
+	};
+	class uskd_neindochohh
+	{
+		name = "uskd_neindochohh";
+		sound[] = {"uskd\sounds\uskd_neindochohh.ogg", db+3, 1.0};
+		titles[] = {0};
+	};
+	class uskd_allemuten
+	{
+		name = "uskd_allemuten";
+		sound[] = {"uskd\sounds\uskd_allemuten.ogg", db+3, 1.0};
+		titles[] = {0};
+	};
+	class uskd_endstress
+	{
+		name = "uskd_endstress";
+		sound[] = {"uskd\sounds\uskd_endstress.ogg", db+1, 1.0};
+		titles[] = {0};
+	};
+	class uskd_hit19
+	{
+		name = "uskd_hit19";
+		sound[] = {"uskd\sounds\uskd_hit19.wss", db+3, 1.0};
+		titles[] = {0};
+	};
+	class uskd_hit22
+	{
+		name = "uskd_hit22";
+		sound[] = {"uskd\sounds\uskd_hit22.wss", db+3, 1.0};
+		titles[] = {0};
+	};
+	//--- US-KD Sounds
+###################################################################################
+delete line in many files
+//_starR  = "<img image='uskd\pics\troj.paa' align='right'/>";	
+###################################################################################
+change ranking points and ace rank sound (j4f)
+- edit \Client\Func_Client_UpdateGUI.sqf (looser rank new, rank points change)
+- new \hint\rank_ace.sqf (Test)
+- new \hint\rank_looser.sqf (Test - geht nicht da schleife <= - 30 punkte)
+Original files:
+\Client\Func_Client_UpdateGUI.sqf.org
+###################################################################################
+new lines in \Client\Func_Client_UpdateGUI.sqf (looser rank ;) )
+add lines (239-243):
+			/////-----US-KD beginning (*US-EDIT-KD*)
+			if (_score <= - 10 ) then {
+				_rank = "Looser";
+			};
+			/////-----US-KD end (*US-EDIT-KD*)
+###################################################################################
+change line in \Client\Func_Client_UpdateGUI.sqf (long Rank Name = new line)
+original line (298):
+		_lowertext ctrlSetStructuredText composeText([parseText(format ["<t size='2'><img image='ranks\%1.paa' align='left'/></t><t align='left' size='1'> %1 %2pt - Respawn </t><t color='#%3' size ='1'>%4s - %5</t>",_rank,score player,_respawnColor,respawnTotal,respawnTnTTime])]);
+new line (300):
+		_lowertext ctrlSetStructuredText composeText([parseText(format ["<t size='2'><img image='ranks\%1.paa' align='left'/></t><t align='left' size='1'> %1 %2pt Respawn: </t><t color='#%3' size ='1'>%4s (%5)</t>",_rank,score player,_respawnColor,respawnTotal,respawnTnTTime])]);
+###################################################################################
+change lines in \Client\Client_Killed.sqf (graduation at the looser points)
+original lines (8-10):
+WFBE_RequestChangeScore = ['SRVFNCREQUESTCHANGESCORE',[player,score player - 3 ]];
+			publicVariable 'WFBE_RequestChangeScore';
+			if (isHostedServer) then {['SRVFNCREQUESTCHANGESCORE',[player,score player - 3]] Spawn HandleSPVF};
+new lines (8-25):
+/////-----US-KD beginning (*US-EDIT-KD*)
+_score = score player;
+if (_score <= 20 ) then {
+WFBE_RequestChangeScore = ['SRVFNCREQUESTCHANGESCORE',[player,score player - 1 ]];
+			publicVariable 'WFBE_RequestChangeScore';
+			if (isHostedServer) then {['SRVFNCREQUESTCHANGESCORE',[player,score player - 1]] Spawn HandleSPVF};
+	} else {
+	if (_score <= 50 ) then {
+	WFBE_RequestChangeScore = ['SRVFNCREQUESTCHANGESCORE',[player,score player - 2 ]];
+				publicVariable 'WFBE_RequestChangeScore';
+				if (isHostedServer) then {['SRVFNCREQUESTCHANGESCORE',[player,score player - 2]] Spawn HandleSPVF};
+		} else {
+		WFBE_RequestChangeScore = ['SRVFNCREQUESTCHANGESCORE',[player,score player - 3 ]];
+					publicVariable 'WFBE_RequestChangeScore';
+					if (isHostedServer) then {['SRVFNCREQUESTCHANGESCORE',[player,score player - 3]] Spawn HandleSPVF};
+		};
+	};
+/////-----US-KD end (*US-EDIT-KD*)
+###################################################################################
+change \stringtable.xml (new content)
+see new lines from 3885 to 3933
+###################################################################################
+edit \Client\Module\Skill\Skill_Medic.sqf and \Client\Module\Skill\Skill_Engineer.sqf
+new Strings for stringtable.xml
+Original files:
+\Client\Module\Skill\Skill_Medic.sqf.org
+\Client\Module\Skill\Skill_Engineer.sqf.org
+###################################################################################
+edit mission.sqm line 1027 (Base Spawn is out of Map)
+original line:
+					position[]={-410.73972,288.71796,2375.209};
+new line:
+					position[]={187.5056,272.79303,2375.209};
+###################################################################################

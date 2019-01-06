@@ -1,0 +1,62 @@
+noch offen:
+- Ranking auf Waffen und Farhrzeuge erweitern
+- Gefängnis für Teamkills
+- Koodinaten und Kompass mit im GPS HUD anzeigen
+- Respawn Verzögerung für C4 Kills / self kills (Ausnutzung für neue Munition beim Base hunten)
+- Karte im Briefing Modus abstellen
+- Memberliste für bestimmte Slots
+- Scroll Menü soll auch in Fahrzeugen funktionieren
+- "Munition" als Auswahl fehlt noch im Com Konstrukitions Menü, wurden erst mal in ..Common\Init\Init_CommonConstants.sqf deaktiviert als Ausbaustufe
+	Original=	['WFBE_UPGRADECONDITION',[true,true,true,true,true,true,false,true,true,paramCounterMeasures,paramArty,paramICBM,if (('WFBE_FASTTRAVEL' Call GetNamespace) > 0) then {true} else {false},true,true,paramEASA,true,true],true] Call SetNamespace;
+	Neu=		['WFBE_UPGRADECONDITION',[true,true,true,true,true,true,false,true,true,paramCounterMeasures,paramArty,paramICBM,if (('WFBE_FASTTRAVEL' Call GetNamespace) > 0) then {true} else {false},true,false,paramEASA,true,true],true] Call SetNamespace;
+- Admin Tools für Admin die sich mit Passwort angemeldet haben (siehe Domination)
+- ab und aufschliessen von Fahrzeugen für Admins (siehe Domination)
+- Message mit Trigger wenn ein Spieler in die Nähe unserer Fahne kommt (Clan blabla usw.)
+- Luftabwehr bei RUS eingenommener Stadt erhöhen. Die Verteidigung für Air von Opfor ist zu schwach (2-3 Schilka os.)
+- bei Einstellungs Menü kommt bei Gästen immer ein Eintrag mehr mit Einstellungen vom SuperAdmin aber mit den Optionen vom Gästen (beim rejoinen bzw. wenn ARMA noch lief und neu joinen)
+- XXX GCam startet nicht, wenn sie per Trigger Menü gestartet wird (0-0-1 usw)
+- XXX Menü geht noch nicht (0-0-1 usw.) Es werden nur die ersten 8 Elemente angezeigt
+- XXX Reload Script Teil für Reloading der sqf aus dem mission-settings Script mit übernehmen
+- XXX Aufruf für die admin.sqf mit in die init nehmen und aus den ..Client\Functions\Client_PreRespawnHandler.sqf und ..Client\Init\Init_Client.sqf löschen
+- XXX Umlaute ändern in den Dateien (UTF-8 BOM Kodierung. Notepad++ beim speichern auf Standard UTF-8 BOM Kodierung einstellen)
+- XXX Respawn Sperre für 30 Sekunden einbauen (siehe Domi)
+- XXX Sichtweite und Gras Menü bur für Admins? = für normale angepasst und für Admins voll
+- XXX die Sounddatei Parameter mal noch separat machen, aus der Mando Sounds mit raus
+- XXX Medic Zelte beschränken auf ein Zelt pro Spieler, dass alte Zelt wird dann abgebaut
+- wofür ist TorM1? Keine Dokumentation zu finden. verhält sich wie normale shilka
+- Tastatenkombination für low gear und normal gear einbauen, evtuell Z und U
+- Bewaffnung der ka-52 tauschen (Raketen)
+- XXX Settings Menü mit in die stringtable.xml einbinden bzw. auf englisch unstellen
+- alte stringtable überprüfen auf schon gemachte Änderungen
+- XXX Pause für GCam Hinweise verlängern
+- IM TEST - Pause in das löschen der Scroll Menü Befehle einbauen (Menü verdoppelt sich ab und an)
+- IM TEST - in die Bezeichnung "Mash" noch den Playernamen einbauen, also "Mash (Hoshi)"
+- beim Aufbau eines neuen Zeltes nach alten Zelten von disconnecteten Spielern suchen und diese löschen
+- XXX "Deploy.." Texte mit in stringtable.xml einbinden
+- XXX Bezeichnung von Spieler Slots mit in die stringtable.xml aufnehmen und anpassen (geht nicht, da mission.sqm zuerst geladen wird und die stringtable.xml noch nicht aktiv ist)
+- Übersetzungen für Msg Fenster im Hint Verzeichnis noch mit in die stringtable.xml aufnehmen
+
+
+
+Ideen:
+- XXX 2. Kamera Modul einführen (schnelleres aus der Anarchy Map) eingebaut, Funktion noch testen (Ergebiss: buggy)
+- Wetter und Tageszeit Script aus dem Gras Script bauen (Server Side basierend)
+- die Sniper Tools nach einiger Zeit wieder verschwinden lassen und die original Waffen wiederherstellen)
+- entfernen von Absturzstellen
+- Scroll Menü mit Untermenü
+- Spawnpunkte für Basen umsetzen
+- die temporären Spawnpunkte für das HQ und die Einheiten weiter außerhalb der Karte setzen und versetzen
+- bei AI Einheiten soll der Friedenszeit Counter nicht greifen (also Einheiten wo der Teamleader eine AI ist)
+- AI Einheiten umgehen Städte mit Friedenszeit
+- Sound Serverseitig abspielen lassen (muss ich euch alle muten zBsp)
+- Supply Geld Schalter
+- bei disconnect kommt das Geld zurück zum com
+- Script für Überprüfung Teamverhältnis beim joinen eines Spieler mit Ausgabe einer Warnung und Kick
+- Starten eines Links im Browser aus Arma herraus. Möglich? zBsp. für das laden einer Anleitung, oder ähnliches
+
+
+
+sonstige Fragen:
+- wie setzt man Variablen richtig für Servervariablen: "variable = EIMER;" für Clientvariablen: "_variable = EIMER;"
+- wie kann man Server side Variablen in Ausgaben (hint zBsp.) einbetten
+- Im Spiel umstellbar Rekrut;Kadett;Veteran;Profi möglich?

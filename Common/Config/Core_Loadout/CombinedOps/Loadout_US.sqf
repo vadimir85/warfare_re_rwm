@@ -942,7 +942,20 @@ WF_Logic setVariable ['accessoriesClasses',_w];
 
 		//--- Templates.
 		_items = ['ItemCompass','ItemGPS','ItemMap','ItemRadio','ItemWatch'];
-
+		_d = []; //name in list
+		_p = []; //picture in list
+		_t = [[]]; //weapons
+		_m1 = [[]]; //uniform items + magazines
+		_m2 = [[]]; //vest items + magazines
+		_m3 = [[]]; //backpack items + magazines
+		_s = [[]]; //uniform, vest, backpack, headgear, goggles, hmd, binocular
+		_i = [_items];
+		_l = [0]; //upgrade level
+		_b = [true]; //allowed
+		_i1 = [[]]; //primary weapon items + 1 magazines (+ 1 grenade)
+		_i2 = [[]]; //secondary weapon items + 1 magazine
+		_i3 = [[]]; //handgun weapon items + 1 magazine
+/*
 		_d = [getText(configFile >> 'CfgWeapons' >> 'SCAR_L_CQC' >> 'displayName') + '/' + getText(configFile >> 'CfgWeapons' >> 'rhsusf_weap_m1911a1' >> 'displayName')];
 		_p = [getText(configFile >> 'CfgWeapons' >> 'SCAR_L_CQC' >> 'picture')];
 		_t = [['SCAR_L_CQC','rhsusf_weap_m1911a1']];
@@ -951,7 +964,7 @@ WF_Logic setVariable ['accessoriesClasses',_w];
 		_i = [_items];
 		_l = [0];
 		_b = [true];
-/*
+
 		_d = _d + [getText(configFile >> 'CfgWeapons' >> 'M16A4_GL' >> 'displayName')];
 		_p = _p + [getText(configFile >> 'CfgWeapons' >> 'M16A4_GL' >> 'picture')];
 		_t = _t + [['M16A4_GL']];
@@ -1103,7 +1116,7 @@ WF_Logic setVariable ['accessoriesClasses',_w];
 			{
 				_get = _x Call GetNamespace;
 				if !(isNil '_get') then {_cost = _cost + (_get select QUERYGEARCOST)};
-			} forEach ((_m select _count) + (_s select _count) + (_i select _count));
+			} forEach ((_m1 select _count) + (_m2 select _count) + (_m3 select _count) + (_s select _count) + (_i select _count) + (_i1 select _count) + (_i2 select _count) + (_i3 select _count));
 			
 			_c = _c + [_cost];
 		};
@@ -1111,14 +1124,18 @@ WF_Logic setVariable ['accessoriesClasses',_w];
 		WF_Logic setVariable ['templateNames',_d];
 		WF_Logic setVariable ['templateCosts',_c];
 		WF_Logic setVariable ['templatePictures',_p];
-		WF_Logic setVariable ['templateMags',_m];
+		WF_Logic setVariable ['templateMags1',_m1];
+		WF_Logic setVariable ['templateMags2',_m2];
+		WF_Logic setVariable ['templateMags3',_m3];
 		WF_Logic setVariable ['templateItems',_i];
 		WF_Logic setVariable ['templateSpecs',_s];
 		WF_Logic setVariable ['templateUpgrades',_l];
 		WF_Logic setVariable ['templateAllowed',_b];
+		WF_Logic setVariable ['templatePrimaryItems',_i1];
+		WF_Logic setVariable ['templateSecondaryItems',_i2];
+		WF_Logic setVariable ['templateSidearmItems',_i3];
 	};
 };
-//снаряжение для синих игроков
 ['WFBE_WESTDEFAULTWEAPONS',['rhs_weap_m16a4_carryhandle','rhs_weap_m72a7'],true] Call SetNamespace;
 ['WFBE_WESTDEFAULTUNIFORM','rhs_uniform_cu_ocp',true] Call SetNamespace;
 ['WFBE_WESTDEFAULTVEST','rhsusf_iotv_ocp',true] Call SetNamespace;
